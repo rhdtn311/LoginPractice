@@ -9,9 +9,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.Arrays;
 
 @Slf4j
@@ -39,5 +41,24 @@ public class HomeController {
     public String join() {
 
         return "/join";
+    }
+
+    @RequestMapping("/sessionLoginHome")
+    public String sessionLoginHome(@SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) Member loginMember
+            , Model model) {
+
+        if (loginMember == null) {
+            return "/login";
+        }
+
+        model.addAttribute("member", loginMember);
+        return "loginHome";
+
+    }
+
+
+    @RequestMapping("/httpSessionLogin")
+    public String httpSessionLogin() {
+        return "/login";
     }
 }

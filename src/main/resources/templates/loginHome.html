@@ -8,5 +8,6 @@
     <h1 th:text="|환영합니다! ${member.name}님|"></h1>
     <br>
     <div> <button th:onclick="|location.href='@{/logout}'|"> 로그아웃 </button></div>
+    <div> <button th:onclick="|location.href='@{/sessionLogout}'|"> 로그아웃(세션) </button></div>
 </body>
 </html>

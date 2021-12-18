@@ -31,6 +31,9 @@ public class MySession {
     // 세션 조회
     public Object getSession(HttpServletRequest request) {
         Cookie[] cookies = request.getCookies();
+        if (cookies == null) {
+            return null;
+        }
 
         for (Cookie cookie : cookies) {
             if (cookie.getName().equals(SESSION_ID)) {
@@ -47,6 +50,11 @@ public class MySession {
     public void removeSession(HttpServletRequest request) {
 
         log.info("sessionStore : {} " , sessionStore);
+
+        if (request.getCookies() == null) {
+            return;
+        }
+
         for (Cookie cookie : request.getCookies()) {
             if (cookie.getName().equals(SESSION_ID)) {
                 sessionStore.remove(cookie.getValue());
