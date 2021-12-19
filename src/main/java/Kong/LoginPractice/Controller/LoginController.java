@@ -8,7 +8,6 @@ import Kong.LoginPractice.service.LoginService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -30,8 +29,7 @@ public class LoginController {
     @PostMapping("/login")
     public String login(@Validated @ModelAttribute LoginDTO loginDTO,
                         BindingResult bindingResult,
-                        HttpServletResponse response,
-                        Model model) {
+                        HttpServletResponse response) {
 
         if (bindingResult.hasErrors()) {
             return "/home";
@@ -61,7 +59,7 @@ public class LoginController {
     @PostMapping("/sessionLogin")
     public String sessionLogin(@Validated @ModelAttribute LoginDTO loginDTO,
                                BindingResult bindingResult,
-                               HttpServletRequest request) {
+                               HttpServletRequest request){
         if (bindingResult.hasErrors()) {
             return "login";
         }
@@ -88,7 +86,6 @@ public class LoginController {
         if (session != null) {
             session.invalidate();
 
-            log.info("session = {}" , session.getAttribute(SessionConst.LOGIN_MEMBER));
         }
         return "redirect:/sessionLoginHome";
     }

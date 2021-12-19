@@ -2,19 +2,14 @@ package Kong.LoginPractice;
 
 import Kong.LoginPractice.domain.member.Member;
 import Kong.LoginPractice.domain.member.MemberRepository;
-import Kong.LoginPractice.service.LoginService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import java.util.Arrays;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -33,7 +28,7 @@ public class HomeController {
         }
 
         model.addAttribute("member", member);
-        log.info("member = {}" , member);
+        log.info("member = {}", member);
         return "loginHome";
     }
 
@@ -60,5 +55,10 @@ public class HomeController {
     @RequestMapping("/httpSessionLogin")
     public String httpSessionLogin() {
         return "/login";
+    }
+
+    @RequestMapping("/loginMemberPage")
+    public String loginMemberPage() {
+        return "loginMemberPage";
     }
 }
